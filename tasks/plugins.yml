@@ -37,14 +37,14 @@
   action: >
     shell bin/plugin install {{ item.name }}
     chdir={{ elasticsearch_home_dir }}
-  when: item.url is not defined
+  when: item.url is not defined and (item.remove is not defined or item.remove == false)
   with_items: elasticsearch_plugins
   ignore_errors: yes
 - name: Installing Plugins by URL
   action: >
     shell bin/plugin install {{ item.name }} -url {{ item.url }}
     chdir={{ elasticsearch_home_dir }}
-  when: item.url is defined
+  when: item.url is defined and (item.remove is not defined or item.remove == false)
   with_items: elasticsearch_plugins
   ignore_errors: yes
 # Fix permissions
