@@ -565,11 +565,14 @@ monitor.jvm.gc.ConcurrentMarkSweep.debug: {{ elasticsearch_gc_soncurrent_mark_sw
 marvel.agent.exporters:
   id1:
     type: http
-    host: {{ elasticsearch_monitoring_hosts }}
+    host:
+    {% for host in elasticsearch_monitoring_hosts %}
+      - "{{ host }}"
+    {% endfor %}
     {% if marvel_elasticsearch_username is defined %}
     auth:
-      username: {{ marvel_elasticsearch_username }}
-      password: {{ marvel_elasticsearch_password }}
+      username: "{{ marvel_elasticsearch_username }}"
+      password: "{{ marvel_elasticsearch_password }}"
     {% endif %}
 {% endif %}
 
