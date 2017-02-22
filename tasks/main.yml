@@ -93,6 +93,7 @@
 # Install Other Generic Plugins
 - include: plugins.yml
   when: (elasticsearch_plugins is defined)
+  tags: ["elasticsearch-plugins"]
 
 # Configure Elasticsearch Node
 - name: Configuring Elasticsearch Node
